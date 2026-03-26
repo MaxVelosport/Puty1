@@ -1,0 +1,50 @@
+modules = ["nodejs-20", "web", "postgresql-16"]
+run = "npm run dev"
+hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+
+[nix]
+channel = "stable-24_05"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[env]
+PORT = "5000"
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["node", "./dist/index.cjs"]
+build = ["npm", "run", "build"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[agent]
+integrations = ["javascript_openai:1.0.0", "javascript_auth_all_persistance:1.0.0", "javascript_openai_ai_integrations:2.0.0", "javascript_database:1.0.0"]
+expertMode = true
+
+[userenv]
+
+[userenv.shared]
+SUPABASE_URL = "https://superbase.aiinvestor360.ru"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzU4MDY3MjAwLCJleHAiOjE5MTU4MzM2MDB9.Vby5udJ_hxoYIKIS1WdnTrCTB1GdP4HqUp7X1R9BF_k"
+SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJpYXQiOjE3NTgwNjcyMDAsImV4cCI6MTkxNTgzMzYwMH0.x7PBbidVC-405Wv-QYgUn8aeu-E1wKUtPZi-5iaoZxA"

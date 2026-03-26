@@ -1,0 +1,18 @@
+Complete UI redesign of sport-workout.tsx and sport-program-view.tsx
+
+Applied dark hi-tech theme with glassmorphism and emerald accents across all
+workout phases (select, warmup, active, completing, done) and all workout modes
+(sets, timer, overview, pose_timer, overviewEntry).
+
+Key visual changes:
+- Gradient hero header on select screen (emerald-teal-cyan)
+- Glassmorphism cards (bg-card/50, backdrop-blur-sm, border-border/50)
+- Emerald gradient CTAs with shadow glow effects
+- Dark-themed modals with backdrop blur
+- Consistent label styling (10px uppercase tracking-wider)
+- Dark-themed input fields (bg-secondary/50 border-border/50)
+- Emerald accent colors for timers, counters, and badges
+- Updated stat cards on completing/done screens with colored icons
+- AI analysis cards with themed borders (emerald/amber/purple)
+- sport-program-view.tsx fully rewritten with matching design tokens
+- Removed all legacy light-mode-only styles (bg-emerald-100, bg-muted, etc.)
